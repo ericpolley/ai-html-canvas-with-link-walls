@@ -3,54 +3,59 @@
   <head>
     <style>
       #canvas {
-        width: 100px;
-        height: 100px;
+        width: 500px;
+        height: 500px;
         border: 1px solid black;
         background-color: lightblue;
       }
     </style>
   </head>
   <body>
-    <canvas id="canvas" width="100" height="100"></canvas>
+    <canvas id="canvas" width="500" height="500"></canvas>
     <script>
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
       // create a red circle
       ctx.beginPath();
-      ctx.arc(50, 50, 5, 0, 2 * Math.PI);
+      ctx.arc(250, 250, 25, 0, 2 * Math.PI);
       ctx.fillStyle = "red";
       ctx.fill();
 
-      let x = 50;
-      let y = 50;
+      let x = 250;
+      let y = 250;
 
       // move the red circle by pressing the arrow keys
       document.addEventListener("keydown", (event) => {
         switch (event.key) {
           case "ArrowUp":
-            y -= 1;
+            y -= 5;
             break;
           case "ArrowDown":
-            y += 1;
+            y += 5;
             break;
           case "ArrowLeft":
-            x -= 1;
+            x -= 5;
             break;
           case "ArrowRight":
-            x += 1;
+            x += 5;
             break;
         }
 
         // check if the red circle has hit the walls of the canvas
-        if (x - 5 < 0) {
+        if (x - 25 < 0) {
           window.location.href = "about.html"; // top wall
-        } else if (x + 5 > 100) {
+        } else if (x + 25 > 500) {
           window.location.href = "contact.html"; // right wall
-        } else if (y - 5 < 0) {
+        } else if (y - 25 < 0) {
           window.location.href = "portfolio.html"; // left wall
-        } else if (y + 5 > 100) {
+        } else if (y + 25 > 500) {
           window.location.href = "blog.html"; // bottom wall
+        }
+
+        // prevent the red circle from moving outside the canvas
+        if (x - 25 < 0 || x + 25 > 500 || y - 25 < 0 || y + 25 > 500) {
+          return;
         }
 
         // clear the canvas
@@ -58,7 +63,7 @@
 
         // redraw the red circle at the new position
         ctx.beginPath();
-        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.arc(x, y, 25, 0, 2 * Math.PI);
         ctx.fillStyle = "red";
         ctx.fill();
       });
